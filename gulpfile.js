@@ -17,7 +17,7 @@ gulpfile.js
 |    |-- install
 |    |-- git-check
 |
-|-- js validation task (in terminal $ gulp js-watch)
+|-- js validation task (in terminal $ gulp jswatch)
 |    |-- jswatch
 |    |-- jshint
 |
