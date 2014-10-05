@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!-- ionic and custom css-->
+    <link href="css/ionic.app.min.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- These includes are removed and replaced with <script src="js/bundle.min.js"></script> in production build -->
+    <!-- build:js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <!-- endbuild -->
+  </head>
+
+  <body ng-app="starter" animation="slide-left-right-ios7">
+
+    <!-- The nav bar that will be updated as we navigate between views -->
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
+        Back
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    
+    <!-- The views will be rendered in the <ion-nav-view> directive below -->
+    <ion-nav-view></ion-nav-view>
+
+    <!-- html block includes are loaded here, these rendered in the <ion-nav-view> above -->
+    <script id="templates/browse.html" type="text/ng-template">
+
+<ion-view title="Browse">
+  	<ion-nav-buttons side="left">
+    	<button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+  	</ion-nav-buttons>
+  	<ion-content class="has-header">
+    	<h1>Browse</h1>
+  	</ion-content>
+</ion-view>
+
+</script>
+
+    <script id="templates/login.html" type="text/ng-template">
+
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text" ng-model="loginData.username">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Log in</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</div>
+
+</script>
+    <script id="templates/menu.html" type="text/ng-template">
+
+<ion-side-menus>
+
+  <ion-pane ion-side-menu-content>
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Left</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item nav-clear menu-close ng-click="login()">
+          Login
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/search">
+          Search
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/browse">
+          Browse
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/playlists">
+          Playlists
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+
+</script>
+
+    <script id="templates/playlist.html" type="text/ng-template">
+
+<ion-view title="Playlist">
+  <ion-content class="has-header">
+    <h1>Playlist</h1>
+  </ion-content>
+</ion-view>
+
+</script>
+
+    <script id="templates/playlists.html" type="text/ng-template">
+
+<ion-view title="Music">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
+        {{playlist.title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+
+</script>
+
+    <script id="templates/search.html" type="text/ng-template">
+
+<ion-view title="Search">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <h1>Search</h1>
+  </ion-content>
+</ion-view>
+
+</script>
+
+
+
+  </body>
+</html>
