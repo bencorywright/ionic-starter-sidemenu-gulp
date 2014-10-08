@@ -36,21 +36,21 @@ gulpfile.js
 ///////////////////////////////////////////////////////////
 */
 
-var gulp 				= require( 'gulp' );
-var gutil 				= require( 'gulp-util' );
-var bower 				= require( 'bower' );
-var concat 				= require( 'gulp-concat' );
-var sass 				= require( 'gulp-sass' );
-var minifyCss 			= require( 'gulp-minify-css' );
-var rename 				= require( 'gulp-rename' );
-var jshint 				= require( 'gulp-jshint' );
-var stylish 			= require( 'jshint-stylish' );
-var htmlreplace 		= require( 'gulp-html-replace' );
-var uglify 				= require( 'gulp-uglifyjs' );
+var gulp = require( 'gulp' );
+var gutil = require( 'gulp-util' );
+var bower = require( 'bower' );
+var concat = require( 'gulp-concat' );
+var sass = require( 'gulp-sass' );
+var minifyCss = require( 'gulp-minify-css' );
+var rename = require( 'gulp-rename' );
+var jshint = require( 'gulp-jshint' );
+var stylish = require( 'jshint-stylish' );
+var htmlreplace = require( 'gulp-html-replace' );
+var uglify = require( 'gulp-uglifyjs' );
 var htmlBlockInclude = require( 'gulp-file-include' );
-var browserSync 		= require('browser-sync');
-var clean 				= require( 'gulp-clean' );
-var sh 					= require( 'shelljs' );
+var browserSync = require( 'browser-sync' );
+var clean = require( 'gulp-clean' );
+var sh = require( 'shelljs' );
 
 
 /* DEFAULT TASK
@@ -62,7 +62,7 @@ var sh 					= require( 'shelljs' );
 4. Then reload on change
 
 */
-gulp.task('default', [ 'browser-sync', 'watch' ]);
+gulp.task( 'default', [ 'browser-sync', 'watch' ] );
 
 // Sass task
 gulp.task( 'sass', function( done ) {
@@ -89,25 +89,25 @@ gulp.task( 'htmlBlockInclude', function() {
 } );
 
 // Browser-sync task, for local devlopment
-gulp.task('browser-sync', [ 'sass', 'htmlBlockInclude' ], function () {
-   var files = [
-      './www_dev/index.html',
+gulp.task( 'browser-sync', [ 'sass', 'htmlBlockInclude' ], function() {
+	var files = [
+      './www_dev/**/*.html',
       './www_dev/css/**/*.css',
       './www_dev/imgs/**/*.png',
       './www_dev/js/**/*.js'
    ];
 
-   browserSync.init(files, {
-      server: {
-         baseDir: './www_dev'
-      }
-   });
-});
+	browserSync.init( files, {
+		server: {
+			baseDir: './www_dev'
+		}
+	} );
+} );
 
 // Watch task - sass, htmlBlockInclude changes
 gulp.task( 'watch', function() {
 	gulp.watch( './scss/**/*.scss', [ 'sass', browserSync.reload ] );
-  	gulp.watch( './www_dev/**/*.html', [ 'htmlBlockInclude', browserSync.reload ] );
+	gulp.watch( './www_dev/**/*.html', [ 'htmlBlockInclude', browserSync.reload ] );
 } );
 
 /* GIT TASKS
@@ -166,7 +166,7 @@ gulp.task( 'jshint', function() {
 
 */
 // Build task - production ready (html, js, css, img)
-gulp.task( 'build', [ 'index-html-build', 'uglify', 'images', 'lib', 'fonts', 'copy-css' ]);
+gulp.task( 'build', [ 'index-html-build', 'uglify', 'images', 'lib', 'fonts', 'copy-css' ] );
 
 // Clean www folder
 gulp.task( 'clean', function() {
@@ -177,7 +177,7 @@ gulp.task( 'clean', function() {
 } );
 
 // index.html build task
-gulp.task( 'index-html-build', ['clean'], function() {
+gulp.task( 'index-html-build', [ 'clean' ], function() {
 	return gulp.src( './www_dev/index.html' )
 		.pipe( htmlreplace( {
 			'js': 'js/bundle.min.js'
@@ -186,7 +186,7 @@ gulp.task( 'index-html-build', ['clean'], function() {
 } );
 
 // JS concat and uglify
-gulp.task( 'uglify', ['clean'], function() {
+gulp.task( 'uglify', [ 'clean' ], function() {
 	return gulp.src( './www_dev/js/**/*.js' )
 		.pipe( uglify( 'bundle.min.js', {
 			mangle: false
@@ -195,25 +195,25 @@ gulp.task( 'uglify', ['clean'], function() {
 } );
 
 // Copy over images
-gulp.task( 'images', ['clean'], function() {
+gulp.task( 'images', [ 'clean' ], function() {
 	return gulp.src( [ './www_dev/img/*' ] )
 		.pipe( gulp.dest( './www/img' ) );
 } );
 
 // Copy over library
-gulp.task( 'lib', ['clean'], function() {
+gulp.task( 'lib', [ 'clean' ], function() {
 	return gulp.src( [ './www_dev/lib/ionic/js/ionic.bundle.min.js' ] )
 		.pipe( gulp.dest( './www/lib/ionic/js/' ) );
 } );
 
 // Copy over fonts
-gulp.task( 'fonts', ['clean'], function() {
+gulp.task( 'fonts', [ 'clean' ], function() {
 	return gulp.src( [ './www_dev/lib/ionic/fonts/*.*' ] )
 		.pipe( gulp.dest( './www/lib/ionic/fonts/' ) );
 } );
 
 // Copy over CSS
-gulp.task( 'copy-css', ['clean'], function() {
+gulp.task( 'copy-css', [ 'clean' ], function() {
 	return gulp.src( [ './www_dev/css/*.css' ] )
 		.pipe( gulp.dest( './www/css/' ) );
 } );
